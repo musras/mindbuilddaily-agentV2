@@ -1,0 +1,35 @@
+name: Daily Mindbuilddaily Images
+
+on:
+  schedule:
+    - cron: '0 18 * * *'   # 18:00 UTC ≈ 20:00 Sverige (normaltid)
+  workflow_dispatch:        # gör att du kan köra manuellt i Actions-fliken
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate images
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python generate.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mindbuilddaily-${{ github.run_id }}
+          path: output/**
