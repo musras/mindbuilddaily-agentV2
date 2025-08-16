@@ -1,0 +1,28 @@
+{
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "bg": "#FFFFFF"
+  },
+  "variants": [
+    {
+      "name": "clean-white",
+      "bg": "#FFFFFF",
+      "text": "#111111"
+    },
+    {
+      "name": "ink-black",
+      "bg": "#0F0F0F",
+      "text": "#FFFFFF"
+    }
+  ],
+  "layout": {
+    "margin_top": 220,
+    "margin_bottom": 220,
+    "margin_left": 120,
+    "margin_right": 120,
+    "line_spacing": 12,
+    "max_chars_per_line": 26,
+    "align": "center"
+  }
+}
