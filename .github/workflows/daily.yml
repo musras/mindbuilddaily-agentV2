@@ -2,8 +2,8 @@ name: Daily Mindbuilddaily Images
 
 on:
   schedule:
-    - cron: '0 18 * * *'   # 18:00 UTC ≈ 20:00 Sverige (normaltid)
-  workflow_dispatch:        # gör att du kan köra manuellt i Actions-fliken
+    - cron: '0 18 * * *'   # 18:00 UTC ≈ 20:00 Sverige
+  workflow_dispatch:
 
 jobs:
   build:
@@ -29,12 +29,10 @@ jobs:
           python generate.py
 
       - name: Upload artifacts
-
-            - name: Upload to Google Drive
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        run: |
-          python upload_to_drive.py
+        uses: actions/upload-artifact@v4
+        with:
+          name: mindbuilddaily-${{ github.run_id }}
+          path: output/**
 
 
         uses: actions/upload-artifact@v4
