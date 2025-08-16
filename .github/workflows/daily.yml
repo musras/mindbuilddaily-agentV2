@@ -29,6 +29,14 @@ jobs:
           python generate.py
 
       - name: Upload artifacts
+
+            - name: Upload to Google Drive
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          python upload_to_drive.py
+
+
         uses: actions/upload-artifact@v4
         with:
           name: mindbuilddaily-${{ github.run_id }}
